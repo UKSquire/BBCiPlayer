@@ -1,5 +1,5 @@
 # BBCiPlayer
-Usage BBCiplayer.exe {url of BBC series link}
+Usage BBC-iplayer.exe {url of BBC series link}
 
 e.g.:
 
@@ -29,3 +29,5 @@ Provides:
 "https://www.bbc.co.uk/iplayer/episode/b0b95311/hey-duggee-series-2-50-the-key-badge"
 "https://www.bbc.co.uk/iplayer/episode/b0bb2ffl/hey-duggee-series-2-51-the-fashion-badge"
 "https://www.bbc.co.uk/iplayer/episode/b0bb2hnm/hey-duggee-series-2-52-the-glasses-badge"
+
+It will also create a file called bbc.txt that is overwritten each time with the outputted series links.
