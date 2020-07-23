@@ -19,7 +19,8 @@
 #include <Array.au3>
 #AutoIt3Wrapper_Change2CUI=y ; save the thing as a commandline app
 $url=$CmdLine[1] ; Take as the input a BBC series link *e.g.: "https://www.bbc.co.uk/iplayer/episodes/m0009tgy/bing?seriesId=m0009xhl"
-$file = @ScriptDir & "\bbc.txt"
+$file = @TempDir & "\bbcipyr.txt"
+$bbcfile = @ScriptDir & "\bbc.txt"
 $sDelim = ","
 InetGet($url, $file) ; go and get the full page contents
 Local $aArray = FileReadToArray($file) ; load this into an array
@@ -27,6 +28,8 @@ Local $iLineCount = @extended ; for everything in the array...
 If @error Then
 	MsgBox($MB_SYSTEMMODAL, "", "There was an error reading the file. @error: " & @error)     ; An error occurred reading the current script file.
 Else
+	Local $hFileOpen = FileOpen($bbcfile, 2)
+
 	For $i = 0 To $iLineCount - 1     ; Loop through the array. UBound($aArray) can also be used.
 		If StringInStr($aArray[$i], "IPLAYER_REDUX_STATE") Then ; this seems to be the single line to parse that contains all the episodes
 			Local $aArray2 = StringSplit($aArray[$i], $sDelim, 2) ; split all lines by comma
@@ -34,9 +37,11 @@ Else
 				If StringInStr($aArray2[$x], "/iplayer/episode/") Then
 					$link=StringMid($aArray2[$x],9) ; ignore the first bits, but add at least one beginning quotation mark:
 					ConsoleWrite("""https://www.bbc.co.uk" & $link &@CRLF)
+					FileWriteLine($bbcfile,"""https://www.bbc.co.uk" & $link &@CRLF)
 				EndIf
 			Next
 		EndIf
 	Next
 EndIf
-
+FileClose($bbcfile)
+FileDelete($file)
