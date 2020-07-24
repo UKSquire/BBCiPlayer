@@ -1,6 +1,7 @@
 #comments-start
 	BBC-iPlayer.au3 - to parse a BBC iPlayer series link and provide the individual program links
     Copyright (C) 2020 Mark Simpson
+	Version 0.3 - remove trailing quotes
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +19,7 @@
 
 #include <Array.au3>
 #AutoIt3Wrapper_Change2CUI=y ; save the thing as a commandline app
+
 $url=$CmdLine[1] ; Take as the input a BBC series link *e.g.: "https://www.bbc.co.uk/iplayer/episodes/m0009tgy/bing?seriesId=m0009xhl"
 $file = @TempDir & "\bbcipyr.txt"
 $bbcfile = @ScriptDir & "\bbc.txt"
@@ -35,9 +37,11 @@ Else
 			Local $aArray2 = StringSplit($aArray[$i], $sDelim, 2) ; split all lines by comma
 			For $x = 0 To UBound($aArray2) - 1 ; look for the lines that contain the iplayer episodes
 				If StringInStr($aArray2[$x], "/iplayer/episode/") Then
-					$link=StringMid($aArray2[$x],9) ; ignore the first bits, but add at least one beginning quotation mark:
-					ConsoleWrite("""https://www.bbc.co.uk" & $link &@CRLF)
-					FileWriteLine($bbcfile,"""https://www.bbc.co.uk" & $link &@CRLF)
+					$link=StringMid($aArray2[$x],9) ; ignore the first bits, and strip trailing quotation mark
+					$link=StringTrimRight($link,1)
+;~ 					ConsoleWrite("link is " & $link & @crlf)
+					ConsoleWrite("https://www.bbc.co.uk" & $link &@CRLF)
+					FileWriteLine($bbcfile,"https://www.bbc.co.uk" & $link &@CRLF)
 				EndIf
 			Next
 		EndIf
