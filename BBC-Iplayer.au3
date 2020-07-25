@@ -21,6 +21,13 @@
 #AutoIt3Wrapper_Change2CUI=y ; save the thing as a commandline app
 
 $url=$CmdLine[1] ; Take as the input a BBC series link *e.g.: "https://www.bbc.co.uk/iplayer/episodes/m0009tgy/bing?seriesId=m0009xhl"
+if StringInStr($url,"programmes") then
+	$aParse=StringSplit($url,"/")
+	$programID=$aParse[5]
+$url="https://www.bbc.co.uk/iplayer/episodes/"&$programID
+;~ 	_ArrayDisplay($aParse)
+EndIf
+
 $file = @TempDir & "\bbcipyr.txt"
 $bbcfile = @ScriptDir & "\bbc.txt"
 $sDelim = ","
