@@ -1,7 +1,7 @@
 #comments-start
 	BBC-iPlayer.au3 - to parse a BBC iPlayer series link and provide the individual program links
     Copyright (C) 2020 Mark Simpson
-	Version 0.3 - remove trailing quotes
+	Version 0.4 - allow programmes links
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
