@@ -1,7 +1,7 @@
-# BBCiPlayer
+# BBC-iPlayer
 youtube-dl does not support providing a series link from BBC Iplayer, but instead can take an input file with individual download links.
 
-This little app simply parses the BBC series link, and provides eiter output to STDOUT or a file called bbc.txt that provides all of the program links within a series.
+This little app simply parses the BBC series link, and provides output to STDOUT and to a file called bbc.txt that provides all of the program links within a series.
 
 Usage BBC-iplayer.exe {url of BBC series link}
 
@@ -34,4 +34,4 @@ Provides:
 "https://www.bbc.co.uk/iplayer/episode/b0bb2ffl/hey-duggee-series-2-51-the-fashion-badge"
 "https://www.bbc.co.uk/iplayer/episode/b0bb2hnm/hey-duggee-series-2-52-the-glasses-badge"
 
-It will also create a file called bbc.txt that is overwritten each time with the outputted series links.
+It will create a file called bbc.txt that is overwritten each time with the outputted series links.
