@@ -19,8 +19,9 @@
 
 #include <Array.au3>
 #AutoIt3Wrapper_Change2CUI=y ; save the thing as a commandline app
-
+ConsoleWrite("Number of params: " & $CmdLine[0])
 $url=$CmdLine[1] ; Take as the input a BBC series link *e.g.: "https://www.bbc.co.uk/iplayer/episodes/m0009tgy/bing?seriesId=m0009xhl"
+$bbcfile=$CmdLine[2]
 if StringInStr($url,"programmes") then
 	$aParse=StringSplit($url,"/")
 	$programID=$aParse[5]
@@ -29,7 +30,7 @@ $url="https://www.bbc.co.uk/iplayer/episodes/"&$programID
 EndIf
 
 $file = @TempDir & "\bbcipyr.txt"
-$bbcfile = @ScriptDir & "\bbc.txt"
+;~ $bbcfile = @ScriptDir & "\bbc.txt"
 $sDelim = ","
 InetGet($url, $file) ; go and get the full page contents
 Local $aArray = FileReadToArray($file) ; load this into an array
